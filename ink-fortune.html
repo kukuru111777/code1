@@ -758,6 +758,431 @@
             line-height: 1.5;
         }
 
+        /* ========== 五行气象图 ========== */
+        .five-elements-chart {
+            background: linear-gradient(135deg,
+                rgba(245, 240, 230, 0.95) 0%,
+                rgba(232, 224, 208, 0.95) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid rgba(26, 26, 26, 0.15);
+            position: relative;
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.1),
+                inset 0 0 60px rgba(26, 26, 26, 0.03);
+        }
+
+        .chart-title {
+            font-size: 2rem;
+            color: var(--ink-black);
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 0.5em;
+            font-weight: bold;
+        }
+
+        /* 主星展示 */
+        .master-star {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(26, 26, 26, 0.03);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .master-star::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(26, 26, 26, 0.05) 0%, transparent 70%);
+            animation: rotateGentle 20s linear infinite;
+        }
+
+        @keyframes rotateGentle {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .master-star-char {
+            font-size: 5rem;
+            color: var(--ink-black);
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .master-star-element {
+            font-size: 1.5rem;
+            color: var(--ink-gray);
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .master-desc {
+            font-size: 1.3rem;
+            color: var(--ink-gray);
+            line-height: 2;
+            letter-spacing: 0.15em;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 四大梁柱 */
+        .four-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .pillar-card {
+            background: rgba(245, 240, 230, 0.8);
+            border-radius: 15px;
+            padding: 25px 20px;
+            border: 2px solid rgba(26, 26, 26, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            transition: all 0.4s ease;
+        }
+
+        /* 财运用金色主题 */
+        .pillar-card.wealth::before {
+            background: linear-gradient(90deg, #d4af37, #f4cf67);
+        }
+
+        /* 婚姻用粉色主题 */
+        .pillar-card.marriage::before {
+            background: linear-gradient(90deg, #e91e63, #f48fb1);
+        }
+
+        /* 事业用青色主题 */
+        .pillar-card.career::before {
+            background: linear-gradient(90deg, #2e7d32, #66bb6a);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .pillar-icon {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .pillar-title {
+            font-size: 1.4rem;
+            color: var(--ink-black);
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 0.3em;
+            font-weight: bold;
+        }
+
+        .pillar-desc {
+            font-size: 1.1rem;
+            color: var(--ink-gray);
+            line-height: 1.8;
+            letter-spacing: 0.1em;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* ========== 视差滚动效果 ========== */
+        .parallax-container {
+            perspective: 1000px;
+            overflow-x: hidden;
+        }
+
+        .parallax-layer {
+            transition: transform 0.3s ease-out;
+        }
+
+        .parallax-bg {
+            transform: translateZ(-200px) scale(1.2);
+        }
+
+        .parallax-mid {
+            transform: translateZ(-100px) scale(1.1);
+        }
+
+        .parallax-fg {
+            transform: translateZ(0px);
+        }
+
+        /* ========== 动态标记效果 ========== */
+
+        /* 金粉墨痕闪烁 - 财运专属 */
+        .gold-sparkle {
+            position: relative;
+            display: inline-block;
+        }
+
+        .gold-sparkle::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: radial-gradient(circle at 30% 30%,
+                rgba(212, 175, 55, 0.4) 0%,
+                transparent 50%),
+                radial-gradient(circle at 70% 70%,
+                rgba(244, 207, 103, 0.4) 0%,
+                transparent 50%);
+            animation: sparkleGlow 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        /* 焦墨色调 - 忌讳专属 */
+        .burnt-ink {
+            color: #8b4513;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .burnt-ink::before {
+            content: '✕';
+            margin-right: 8px;
+            color: #c62828;
+        }
+
+        /* ========== 宜忌指南（每日乾坤）========== */
+        .daily-guide {
+            background: linear-gradient(135deg,
+                rgba(245, 240, 230, 0.9) 0%,
+                rgba(232, 224, 208, 0.9) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 2px solid rgba(26, 26, 26, 0.1);
+            position: relative;
+        }
+
+        .daily-guide::before {
+            content: '今日乾坤';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ink-black);
+            color: var(--paper-light);
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+        }
+
+        .daily-date {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--ink-gray);
+            margin-bottom: 25px;
+            letter-spacing: 0.2em;
+        }
+
+        .yi-ji-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .yi-section, .ji-section {
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .yi-section {
+            background: linear-gradient(135deg,
+                rgba(46, 125, 50, 0.08) 0%,
+                rgba(46, 125, 50, 0.03) 100%);
+            border: 2px solid rgba(46, 125, 50, 0.2);
+        }
+
+        .ji-section {
+            background: linear-gradient(135deg,
+                rgba(198, 40, 40, 0.08) 0%,
+                rgba(198, 40, 40, 0.03) 100%);
+            border: 2px solid rgba(198, 40, 40, 0.2);
+        }
+
+        .yi-title, .ji-title {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 0.4em;
+        }
+
+        .yi-title {
+            color: #2e7d32;
+        }
+
+        .ji-title {
+            color: #c62828;
+        }
+
+        .yi-list, .ji-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .yi-item, .ji-item {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            font-weight: bold;
+        }
+
+        .yi-item {
+            background: rgba(46, 125, 50, 0.12);
+            color: #2e7d32;
+            border: 1px solid rgba(46, 125, 50, 0.3);
+        }
+
+        .ji-item {
+            background: rgba(198, 40, 40, 0.12);
+            color: #c62828;
+            border: 1px solid rgba(198, 40, 40, 0.3);
+        }
+
+        /* ========== 时间运势 ========== */
+        .time-forecast-section {
+            background: linear-gradient(135deg,
+                rgba(255, 248, 220, 0.8) 0%,
+                rgba(245, 240, 230, 0.8) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 2px solid rgba(26, 26, 26, 0.1);
+        }
+
+        .forecast-title {
+            font-size: 1.6rem;
+            color: var(--ink-black);
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 0.3em;
+        }
+
+        .forecast-cards {
+            display: grid;
+            gap: 20px;
+        }
+
+        .forecast-card {
+            background: rgba(245, 240, 230, 0.7);
+            border-radius: 15px;
+            padding: 20px 25px;
+            border-left: 4px solid var(--ink-black);
+            transition: all 0.3s ease;
+        }
+
+        .forecast-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .forecast-period {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+        }
+
+        .forecast-period-name {
+            font-size: 1.3rem;
+            color: var(--ink-black);
+            letter-spacing: 0.2em;
+            font-weight: bold;
+        }
+
+        .forecast-period-score {
+            font-size: 2rem;
+            color: var(--ink-black);
+            font-weight: bold;
+        }
+
+        .forecast-desc {
+            font-size: 1.15rem;
+            color: var(--ink-gray);
+            line-height: 1.8;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+        }
+
+        .forecast-advice {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* 滚动长卷效果 */
+        .scroll-container {
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        .scroll-layer {
+            transition: transform 0.1s ease-out;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .four-pillars {
+                grid-template-columns: 1fr;
+            }
+
+            .yi-ji-container {
+                grid-template-columns: 1fr;
+            }
+
+            .master-star-char {
+                font-size: 3.5rem;
+            }
+
+            .pillar-card {
+                padding: 20px 15px;
+            }
+        }
+
         /* 印章装饰 */
         .seal {
             position: fixed;
@@ -1467,87 +1892,116 @@
             };
         }
 
-        // 生成命理解析
-        function generateFortune(eightChars, year, month, day) {
-            // 五行分析
+        // 生成命理解析（全量命盘系统）
+        function generateFortune(eightChars, birthYear, birthMonth, birthDay) {
             const fiveElementAnalysis = analyzeFiveElements(eightChars);
             const currentYear = new Date().getFullYear();
-            const age = currentYear - year;
+            const age = currentYear - birthYear;
+            const seed = birthYear + birthMonth + birthDay;
 
-            // 古风判词库
-            const ancientVerdicts = {
-                personality: [
-                    '性沉静，若深渊之水，藏锋不露。遇事不惊，从容应对，有古君子之风。',
-                    '心如明镜，性似清风，处世圆融而不失本色。待人以诚，故得道多助。',
-                    '天资聪颖，心如朗月。思虑深远，料事如神，有经天纬地之才。',
-                    '性温厚如玉，心宽似海。与世无争，却暗藏乾坤，大智若愚之相。',
-                    '意志如铁，百折不挠。胸中自有百万兵，临大事而不乱，真英雄也。'
-                ],
-                career: [
-                    '仕途平稳，如履平地。宜守不宜攻，待时而动，必有贵人相助。',
-                    '财运亨通，如水之就下。正财旺盛，偏财亦有，但须守正出奇，方可长久。',
-                    '创业之机已至，如春雷乍动。宜速不宜缓，当断则断，可成大业。',
-                    '职场上位，如日中天。上司青眼有加，同僚心悦诚服，晋升指日可待。',
-                    '技艺精湛，如切如磋。精益求精，必成大家，宜深耕专业，不宜浮躁。'
-                ],
-                love: [
-                    '姻缘天定，如琴瑟和鸣。与伴侣心意相通，举案齐眉，白头偕老之相。',
-                    '桃花正旺，如春花绽放。良缘将至，当惜取眼前人，莫待无花空折枝。',
-                    '情深如海，性灵相通。所求非皮囊之美，乃灵魂之共鸣，宜寻觅知音。',
-                    '晚婚方吉，如陈酿愈香。待心智成熟，情缘自至，急则乱，缓则成。',
-                    '魅力自内而外，如兰之馨。异性缘佳，但情之所钟，须专一不二方得圆满。'
-                ],
-                health: [
-                    '体健如松，然须防劳损。劳逸结合，如弦之张弛有度，方可长久。',
-                    '脾胃需养，如土地需耕。饮食清淡有节，则身轻体健，百病不侵。',
-                    '睡眠如金，不可轻忽。起居有时，如日月运行，则精神饱满，气色红润。',
-                    '心火宜降，如炉火需控。修身养性，清心寡欲，则心平气和，延年益寿。',
-                    '先天禀赋甚佳，然养生之道在心。心宽则体胖，无忧则无疾，乐天知命。'
-                ]
+            // 确定主星（日主五行）
+            const dayMaster = eightChars.day[0];
+            const masterElement = fiveElements[dayMaster];
+            const elementCount = fiveElementAnalysis.counts[masterElement];
+
+            // 主星强弱判定
+            let strength, strengthDesc;
+            if (elementCount >= 3) {
+                strength = '极旺';
+                strengthDesc = '气势如虹，势不可挡，然过刚易折，宜以柔克刚';
+            } else if (elementCount === 2) {
+                strength = '旺盛';
+                strengthDesc = '根基深厚，枝繁叶茂，得天时地利，可大展宏图';
+            } else if (elementCount === 1) {
+                strength = '中和';
+                strengthDesc = '不偏不倚，中正平和，如止水明镜，映照万物';
+            } else {
+                strength = '偏弱';
+                strengthDesc = '独木难支，需借风势，枯木逢春，待时而发';
+            }
+
+            // 主星禅意描述
+            const masterDescMap = {
+                '金': `金性坚刚，宁折不屈。如宝剑出鞘，光耀寒芒。${strengthDesc}`,
+                '木': `木主仁德，生生不息。如青松翠柏，历霜弥坚。${strengthDesc}`,
+                '水': `水善利万物，处下不争。如深潭静水，藏龙卧虎。${strengthDesc}`,
+                '火': `火主光明，普照四方。如旭日东升，驱散阴霾。${strengthDesc}`,
+                '土': `土厚载物，包容天地。如大地之母，孕育生机。${strengthDesc}`
             };
 
-            // 五行损益建议
-            const fiveElementAdvice = {
-                '金': '宜食白色蔬果，多行西北方，佩金银饰品，常听金石之声。',
-                '木': '宜食绿色蔬菜，多行东方，养植花草，常闻丝竹之音。',
-                '水': '宜食黑色食物，多行北方，近水而居，常听如水之音。',
-                '火': '宜食红色蔬果，多行南方，晒太阳，常听钟鼓之声。',
-                '土': '宜食黄色五谷，多居中央，脚踏实地，常听鼓琴之音。'
-            };
-
-            // 流年运势
-            const yearFortune = (currentYear % 12);
-            const yearVerdicts = [
-                '流年大利，如鱼得水。宜大展宏图，把握机遇，必有斩获。',
-                '流年平稳，如舟行静水。宜守成进取，稳扎稳打，不宜冒进。',
-                '流年有冲，如行险滩。宜低调行事，谨言慎行，待时而动。',
-                '流年合命，如暗室逢灯。贵人运旺，诸事顺遂，可大胆前行。'
+            // 四大梁柱 - 财运
+            const wealthVerdicts = [
+                '求财之道，如水之就下，顺势而为。正财源于勤勉，偏财赖于机缘。今财星入命，枯木逢春，金石为开之象，宜乘势进取，积少成多。',
+                '财运亨通，如源头活水，源源不绝。然财来财去，如过眼云烟。宜开源节流，量入为出。切忌贪得无厌，知足常乐。',
+                '财路虽有，但如履薄冰，需谨慎行事。宜守不宜攻，稳扎稳打。待时机成熟，自有贵人提携，水到渠成。',
+                '财运平平，如止水无波。此乃积蓄之时，宜韬光养晦，厚积薄发。勿急于求成，勿贪图捷径，脚踏实地，终有回报。',
+                '财运旺盛，如日中天，光芒万丈。然盛极而衰，物极必反。宜居安思危，持盈保泰，方能长久。'
             ];
 
-            // 使用日期作为随机种子
-            const seed = year + month + day;
+            // 四大梁柱 - 婚姻
+            const marriageVerdicts = [
+                '红线暗牵，缘分天定。良缘将至之时，如春雷乍动，势不可挡。宜待时而动，顺其自然，强求反损，缘到自然成。',
+                '姻缘美满，如琴瑟和鸣。然情路虽平，风雨难免。宜相互包容，相濡以沫。白首之约，重在坚守，而非激情。',
+                '情路多舛，如行舟逆水。此乃考验之时，宜修身养性，提升自我。花香蝶自来，梧桐凤必至。勿因挫折而自弃。',
+                '桃花正旺，如春花绽放。然花多眼乱，易迷失方向。宜专一不二，珍惜眼前人。朝秦暮楚，终是一场空。',
+                '晚婚方吉，如陈酿愈香。年轻时宜专注于事业，待心智成熟，缘分自然而至。早婚易变，慎之慎之。'
+            ];
+
+            // 四大梁柱 - 事业
+            const careerVerdicts = [
+                '仕途亨通，如日中天。上司青眼有加，同僚心悦诚服。宜乘势而上，大展宏图。然功高震主，需知进退，明哲保身。',
+                '事业平稳，如舟行静水。虽无大风大浪，亦难有大起大落。宜守成进取，稳扎稳打。待时机成熟，自有贵人相助。',
+                '职场多艰，如履薄冰。上下级关系紧张，同事间竞争激烈。宜低调行事，谨言慎行。韬光养晦，待时而动。',
+                '创业之机，如春雷乍动。时机已至，宜速不宜缓。当断则断，果断出击。然创业维艰，需有充分准备，勿草率行事。',
+                '技艺精湛，如切如磋。宜在专业领域深耕，精益求精。成为行业翘楚，指日可待。切忌浮躁，贪多嚼不烂。'
+            ];
+
+            // 使用种子选择判词
             const getIndex = (arr) => seed % arr.length;
 
-            // 一动不如一静的古风格言
-            const wisdomVerdict = [
-                '一动不如一静，以静制动，方为上策。',
-                '事缓则圆，欲速不达，静待天时。',
-                '韬光养晦，厚积薄发，不鸣则已，一鸣惊人。',
-                '守正待机，顺天应人，水到渠成。',
-                '大智若愚，大巧若拙，藏拙于巧，用晦而明。'
-            ][seed % 5];
+            // 获取当前时间信息
+            const now = new Date();
+            const currentMonth = now.getMonth() + 1;
+            const currentQuarter = Math.ceil(currentMonth / 3);
+            const quarterNames = ['', '春季', '夏季', '秋季', '冬季'];
+
+            // 计算时间运势
+            const timeForecast = {
+                month: calculateTimeFortune(eightChars, now, 'month'),
+                quarter: calculateTimeFortune(eightChars, now, 'quarter'),
+                year: calculateTimeFortune(eightChars, now, 'year')
+            };
+
+            // 生成每日宜忌
+            const dailyGuide = generateDailyGuide(eightChars, now);
 
             return {
-                personality: ancientVerdicts.personality[getIndex(ancientVerdicts.personality)],
-                career: ancientVerdicts.career[getIndex(ancientVerdicts.career)],
-                love: ancientVerdicts.love[getIndex(ancientVerdicts.love)],
-                health: ancientVerdicts.health[getIndex(ancientVerdicts.health)],
+                // 五行气象图
+                fiveElementsChart: {
+                    masterStar: {
+                        char: dayMaster,
+                        element: masterElement,
+                        strength: strength,
+                        description: masterDescMap[masterElement]
+                    },
+                    fourPillars: {
+                        wealth: wealthVerdicts[getIndex(wealthVerdicts)],
+                        marriage: marriageVerdicts[getIndex(marriageVerdicts)],
+                        career: careerVerdicts[getIndex(careerVerdicts)]
+                    }
+                },
+
+                // 时空联动预测
+                timeForecast: timeForecast,
+
+                // 每日宜忌
+                dailyGuide: dailyGuide,
+
+                // 保留原有字段
                 fiveElements: {
                     analysis: fiveElementAnalysis,
                     advice: fiveElementAdvice[fiveElementAnalysis.weak]
                 },
-                yearFortune: yearVerdicts[seed % yearVerdicts.length],
-                wisdom: wisdomVerdict,
                 cities: recommendCities(fiveElementAnalysis.weak, fiveElementAnalysis.strong),
                 lucky: {
                     number: (seed % 9) + 1,
@@ -1557,7 +2011,117 @@
             };
         }
 
+        // 计算时间运势
+        function calculateTimeFortune(eightChars, currentDate, period) {
+            const now = currentDate;
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const quarter = Math.ceil(month / 3);
+
+            let periodName, periodNum;
+            if (period === 'month') {
+                periodName = `${year}年${month}月`;
+                periodNum = month;
+            } else if (period === 'quarter') {
+                periodName = `${year}年 ${['', '春', '春', '夏', '夏', '夏', '秋', '秋', '秋', '冬', '冬', '冬'][quarter]}季`;
+                periodNum = quarter;
+            } else {
+                periodName = `${year}年`;
+                periodNum = year;
+            }
+
+            // 根据八字和时间计算运势分数（简化版，基于随机种子）
+            const baseScore = 70;
+            const dateSeed = year + month + now.getDate();
+            const randomFactor = dateSeed % 21; // -10 to +10
+            const score = Math.min(100, Math.max(40, baseScore + randomFactor));
+
+            // 运势描述
+            const fortunes = {
+                high: [
+                    '运势如虹，势不可挡。宜乘势而上，大展宏图。',
+                    '吉星高照，贵人相助。把握机遇，必有斩获。',
+                    '如鱼得水，游刃有余。诸事顺遂，马到成功。'
+                ],
+                medium: [
+                    '运势平稳，不偏不倚。宜守成进取，稳扎稳打。',
+                    '虽有波澜，终归平稳。宜谨慎行事，待时而动。',
+                    '吉凶参半，宜守不宜攻。静观其变，顺势而为。'
+                ],
+                low: [
+                    '运势低迷，如履薄冰。宜低调行事，谨言慎行。',
+                    '多事之秋，宜韬光养晦。待时而动，必有转机。',
+                    '如行险滩，需小心翼翼。切忌冒进，以守为攻。'
+                ]
+            };
+
+            const fortuneLevel = score >= 80 ? 'high' : score >= 60 ? 'medium' : 'low';
+            const fortuneOptions = fortunes[fortuneLevel];
+            const fortune = fortuneOptions[Math.floor(Math.random() * fortuneOptions.length)];
+
+            return {
+                period: periodName,
+                periodNum: periodNum,
+                score: score,
+                fortune: fortune,
+                level: score >= 80 ? '上吉' : score >= 60 ? '中平' : '慎之'
+            };
+        }
+
+        // 生成每日宜忌
+        function generateDailyGuide(eightChars, currentDate) {
+            const dayMaster = eightChars.day[0];
+            const masterElement = fiveElements[dayMaster];
+
+            // 宜忌数据库
+            const yiJiDatabase = {
+                '金': {
+                    yi: ['静心', '远行', '开市', '纳财', '修造', '交易'],
+                    ji: ['争执', '借贷', '安葬', '动土', '大动']
+                },
+                '木': {
+                    yi: ['种植', '修身', '读书', '开业', '嫁娶', '出行'],
+                    ji: ['伐木', '破土', '诉讼', '贪婪', '急躁']
+                },
+                '水': {
+                    yi: ['清洁', '沐浴', '出行', '纳财', '动土', '交易'],
+                    ji: ['争执', '大动', '破土', '安葬', '焦躁']
+                },
+                '火': {
+                    yi: ['祈福', '祭祀', '开业', '求财', '签约', '出行'],
+                    ji: ['动土', '安葬', '争吵', '急躁', '贪心']
+                },
+                '土': {
+                    yi: ['修造', '动土', '开业', '交易', '种植', '安身'],
+                    ji: ['远行', '搬迁', '诉讼', '大动', '浮躁']
+                }
+            };
+
+            // 根据当前日期的奇偶性调整
+            const day = currentDate.getDate();
+            const startIndex = day % 3;
+
+            const yiList = yiJiDatabase[masterElement].yi.slice(startIndex, startIndex + 4);
+            const jiList = yiJiDatabase[masterElement].ji.slice(startIndex, startIndex + 4);
+
+            return {
+                date: `${currentDate.getFullYear()}年${currentDate.getMonth() + 1}月${day}日`,
+                yi: yiList,
+                ji: jiList
+            };
+        }
+
+        // 五行损益建议
+        const fiveElementAdvice = {
+            '金': '宜食白色蔬果，多行西北方，佩金银饰品，常听金石之声。',
+            '木': '宜食绿色蔬菜，多行东方，养植花草，常闻丝竹之音。',
+            '水': '宜食黑色食物，多行北方，近水而居，常听如水之音。',
+            '火': '宜食红色蔬果，多行南方，晒太阳，常听钟鼓之声。',
+            '土': '宜食黄色五谷，多居中央，脚踏实地，常听鼓琴之音。'
+        };
+
         // 显示结果（带动画）
+        // 显示结果（视差滚动 + 动态标记）
         function showResult(eightChars, fortune) {
             const resultSection = document.getElementById('resultSection');
             const eightCharacters = document.getElementById('eightCharacters');
@@ -1582,23 +2146,102 @@
                     return `<span class="element-item ${classMap[element]}">${element}${count}</span>`;
                 }).join('');
 
-            fortuneContent.innerHTML = `
-                <div class="fortune-text" data-delay="0">
+            // 生成五行气象图HTML
+            const chartHTML = `
+                <div class="fortune-text scroll-layer parallax-fg" data-delay="0">
+                    <div class="five-elements-chart">
+                        <div class="chart-title">五行气象图</div>
+
+                        <div class="master-star">
+                            <div class="master-star-char">${fortune.fiveElementsChart.masterStar.char}</div>
+                            <div class="master-star-element">
+                                ${fortune.fiveElementsChart.masterStar.element}星 ·
+                                <span style="font-size: 1.2rem; color: ${fortune.fiveElementsChart.masterStar.element === '金' ? '#d4af37' : fortune.fiveElementsChart.masterStar.element === '木' ? '#2e7d32' : fortune.fiveElementsChart.masterStar.element === '水' ? '#1565c0' : fortune.fiveElementsChart.masterStar.element === '火' ? '#c62828' : '#ef6c00'}">${fortune.fiveElementsChart.masterStar.strength}</span>
+                            </div>
+                            <div class="master-desc">${fortune.fiveElementsChart.masterStar.description}</div>
+                        </div>
+
+                        <div class="four-pillars">
+                            <div class="pillar-card wealth">
+                                <div class="pillar-icon">💰</div>
+                                <div class="pillar-title"><span class="gold-sparkle">求财之道</span></div>
+                                <div class="pillar-desc">${fortune.fiveElementsChart.fourPillars.wealth}</div>
+                            </div>
+                            <div class="pillar-card marriage">
+                                <div class="pillar-icon">💑</div>
+                                <div class="pillar-title">缘分归处</div>
+                                <div class="pillar-desc">${fortune.fiveElementsChart.fourPillars.marriage}</div>
+                            </div>
+                            <div class="pillar-card career">
+                                <div class="pillar-icon">📈</div>
+                                <div class="pillar-title">功名进退</div>
+                                <div class="pillar-desc">${fortune.fiveElementsChart.fourPillars.career}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fortune-text scroll-layer parallax-mid" data-delay="1">
                     <div class="five-elements">
                         <div class="five-elements-title">五行损益</div>
                         <div class="five-elements-grid">${fiveElementsHTML}</div>
                         <div class="five-elements-advice">${fortune.fiveElements.analysis.balance} · ${fortune.fiveElements.advice}</div>
                     </div>
                 </div>
-                <div class="fortune-text" data-delay="1">
-                    <div class="year-fortune">
-                        <div class="year-fortune-text">${fortune.yearFortune}</div>
+
+                <div class="fortune-text scroll-layer parallax-bg" data-delay="2">
+                    <div class="time-forecast-section">
+                        <div class="forecast-title">时空运势</div>
+                        <div class="forecast-cards">
+                            <div class="forecast-card">
+                                <div class="forecast-period">
+                                    <div class="forecast-period-name">${fortune.timeForecast.month.period}</div>
+                                    <div class="forecast-period-score">${fortune.timeForecast.month.score}分</div>
+                                </div>
+                                <div class="forecast-desc">${fortune.timeForecast.month.fortune}</div>
+                                <div class="forecast-advice">运势级别：${fortune.timeForecast.month.level}</div>
+                            </div>
+                            <div class="forecast-card">
+                                <div class="forecast-period">
+                                    <div class="forecast-period-name">${fortune.timeForecast.quarter.period}</div>
+                                    <div class="forecast-period-score">${fortune.timeForecast.quarter.score}分</div>
+                                </div>
+                                <div class="forecast-desc">${fortune.timeForecast.quarter.fortune}</div>
+                                <div class="forecast-advice">运势级别：${fortune.timeForecast.quarter.level}</div>
+                            </div>
+                            <div class="forecast-card">
+                                <div class="forecast-period">
+                                    <div class="forecast-period-name">${fortune.timeForecast.year.period}</div>
+                                    <div class="forecast-period-score">${fortune.timeForecast.year.score}分</div>
+                                </div>
+                                <div class="forecast-desc">${fortune.timeForecast.year.fortune}</div>
+                                <div class="forecast-advice">运势级别：${fortune.timeForecast.year.level}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="fortune-text" data-delay="2">
-                    <div class="wisdom-quote">${fortune.wisdom}</div>
+
+                <div class="fortune-text scroll-layer parallax-fg" data-delay="3">
+                    <div class="daily-guide">
+                        <div class="daily-date">${fortune.dailyGuide.date}</div>
+                        <div class="yi-ji-container">
+                            <div class="yi-section">
+                                <div class="yi-title">宜</div>
+                                <div class="yi-list">
+                                    ${fortune.dailyGuide.yi.map(item => `<span class="yi-item">${item}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="ji-section">
+                                <div class="ji-title">忌</div>
+                                <div class="ji-list">
+                                    ${fortune.dailyGuide.ji.map(item => `<span class="ji-item burnt-ink">${item}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="fortune-text" data-delay="3">
+
+                <div class="fortune-text scroll-layer parallax-mid" data-delay="4">
                     <div class="city-recommendation">
                         <div class="city-rec-title">宜居之城</div>
                         <div class="city-rec-subtitle">
@@ -1614,47 +2257,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="fortune-text" data-delay="4">
-                    <div class="analysis-item">
-                        <div class="analysis-label">属相 · ${eightChars.zodiac}</div>
-                    </div>
-                </div>
-                <div class="fortune-text" data-delay="5">
-                    <div class="analysis-item">
-                        <div class="analysis-label">性格</div>
-                        <div class="analysis-text">${fortune.personality}</div>
-                    </div>
-                </div>
-                <div class="fortune-text" data-delay="6">
-                    <div class="analysis-item">
-                        <div class="analysis-label">事业</div>
-                        <div class="analysis-text">${fortune.career}</div>
-                    </div>
-                </div>
-                <div class="fortune-text" data-delay="7">
-                    <div class="analysis-item">
-                        <div class="analysis-label">感情</div>
-                        <div class="analysis-text">${fortune.love}</div>
-                    </div>
-                </div>
-                <div class="fortune-text" data-delay="8">
-                    <div class="analysis-item">
-                        <div class="analysis-label">健康</div>
-                        <div class="analysis-text">${fortune.health}</div>
-                    </div>
-                </div>
-                <div class="fortune-text" data-delay="9">
+
+                <div class="fortune-text scroll-layer parallax-bg" data-delay="5">
                     <div class="analysis">
                         <div class="analysis-label">吉祥</div>
                         <div class="analysis-text">
-                            幸运数字：${fortune.lucky.number} | 幸运颜色：${fortune.lucky.color} | 吉祥方位：${fortune.lucky.direction}
+                            幸运数字：<span class="gold-sparkle">${fortune.lucky.number}</span> |
+                            幸运颜色：${fortune.lucky.color} |
+                            吉祥方位：${fortune.lucky.direction}
                         </div>
                     </div>
                 </div>
-                <div class="fortune-text" data-delay="10">
+
+                <div class="fortune-text scroll-layer parallax-fg" data-delay="6">
                     <button class="recalculate-btn" onclick="resetCalculation()">重新测算</button>
                 </div>
             `;
+
+            // Assign the generated HTML to fortuneContent
+            fortuneContent.innerHTML = chartHTML;
+
+            // 启用视差滚动效果
+            resultSection.classList.add('parallax-container');
 
             // 添加朱砂印章
             const existingSeal = document.querySelector('.result-seal');
@@ -1668,13 +2292,10 @@
 
             // 印章点击事件
             resultSeal.addEventListener('click', () => {
-                // 创建闪烁效果
                 resultSeal.style.animation = 'sealFlash 0.6s ease';
                 setTimeout(() => {
                     resultSeal.style.animation = '';
                 }, 600);
-
-                // 滚动回顶部
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
@@ -1691,10 +2312,38 @@
                 resultSeal.classList.add('show');
             }, 2000);
 
+            // 视差滚动效果
+            initParallaxScroll(resultSection);
+
             // 滚动到结果区域
             setTimeout(() => {
                 resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 500);
+        }
+
+        // 视差滚动初始化
+        function initParallaxScroll(container) {
+            let ticking = false;
+
+            container.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        const scrollTop = container.scrollTop;
+                        const layers = container.querySelectorAll('.scroll-layer');
+
+                        layers.forEach(layer => {
+                            const speed = layer.classList.contains('parallax-bg') ? 0.2 :
+                                         layer.classList.contains('parallax-mid') ? 0.4 :
+                                         0.6;
+                            layer.style.transform = `translateY(${scrollTop * speed}px)`;
+                        });
+
+                        ticking = false;
+                    });
+
+                    ticking = true;
+                }
+            });
         }
 
         // 重新测算
