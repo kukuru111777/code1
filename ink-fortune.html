@@ -141,6 +141,91 @@
             margin-bottom: 30px;
         }
 
+        /* 性别选择器 */
+        .gender-selector-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 40px;
+        }
+
+        .gender-label {
+            font-size: 1.3rem;
+            color: var(--ink-gray);
+            letter-spacing: 0.15em;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 20px;
+        }
+
+        .gender-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 30px;
+            border: 2px solid rgba(26, 26, 26, 0.15);
+            border-radius: 25px;
+            background: rgba(245, 240, 230, 0.5);
+            cursor: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gender-option::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(26, 26, 26, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.4s ease;
+        }
+
+        .gender-option:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .gender-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-color: rgba(26, 26, 26, 0.3);
+        }
+
+        .gender-option.selected {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(51, 51, 51, 0.9) 100%);
+            border-color: var(--ink-black);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gender-option.selected .gender-icon,
+        .gender-option.selected .gender-text {
+            color: var(--paper-light);
+        }
+
+        .gender-icon {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--ink-black);
+            transition: all 0.3s ease;
+        }
+
+        .gender-text {
+            font-size: 1.2rem;
+            color: var(--ink-gray);
+            letter-spacing: 0.2em;
+            transition: all 0.3s ease;
+        }
+
         label {
             display: block;
             font-size: 1.3rem;
@@ -150,41 +235,22 @@
             text-align: center;
         }
 
-        /* 斜向布局容器 */
+        /* 纵向布局容器 */
         .date-inputs {
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
             width: 100%;
-            height: 380px;
-            min-height: 380px;
         }
 
         /* 选择器项 */
         .date-selector {
-            position: absolute;
-            width: 140px;
+            position: relative;
+            width: 200px;
             text-align: center;
             cursor: none;
             transition: all 0.3s ease;
-        }
-
-        .date-selector:nth-child(4) {
-            top: 0;
-            left: calc(50% - 135px);
-        }
-
-        .date-selector:nth-child(5) {
-            top: 80px;
-            left: calc(50% - 45px);
-        }
-
-        .date-selector:nth-child(6) {
-            top: 160px;
-            left: calc(50% + 45px);
-        }
-
-        .date-selector:nth-child(7) {
-            top: 240px;
-            left: calc(50% + 135px);
         }
 
         /* 选择器标签 */
@@ -244,41 +310,9 @@
             font-size: 1.2rem;
         }
 
-        /* 气韵连接线 */
+        /* 气韵连接线 - 纵向布局隐藏 */
         .qi-line {
-            position: absolute;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .qi-line-1 {
-            top: 40px;
-            left: calc(50% - 75px);
-            width: 80px;
-            height: 50px;
-            border-right: 1px dashed rgba(26, 26, 26, 0.15);
-            border-bottom: 1px dashed rgba(26, 26, 26, 0.15);
-            border-radius: 0 0 20px 0;
-        }
-
-        .qi-line-2 {
-            top: 120px;
-            left: calc(50% + 15px);
-            width: 50px;
-            height: 50px;
-            border-right: 1px dashed rgba(26, 26, 26, 0.15);
-            border-bottom: 1px dashed rgba(26, 26, 26, 0.15);
-            border-radius: 0 0 20px 0;
-        }
-
-        .qi-line-3 {
-            top: 200px;
-            left: calc(50% + 105px);
-            width: 50px;
-            height: 50px;
-            border-right: 1px dashed rgba(26, 26, 26, 0.15);
-            border-bottom: 1px dashed rgba(26, 26, 26, 0.15);
-            border-radius: 0 0 20px 0;
+            display: none;
         }
 
         /* 古风弹窗选择列表 */
@@ -536,7 +570,7 @@
             position: absolute;
             bottom: 30px;
             right: 30px;
-            width: 90px;
+            width: 110px;
             height: 90px;
             background: linear-gradient(135deg, #c83232 0%, #a02828 100%);
             border-radius: 8px;
@@ -550,6 +584,7 @@
             transition: all 0.4s ease;
             opacity: 0;
             transform: scale(0.8) rotate(-15deg);
+            padding: 0 10px;
         }
 
         .result-seal.show {
@@ -565,12 +600,13 @@
         }
 
         .result-seal-text {
-            font-size: 2.5rem;
+            font-size: 1.4rem;
             color: #f5f0e6;
             font-family: 'Ma Shan Zheng', serif;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            pointer-events: none;
+            text-align: center;
+            line-height: 1.2;
         }
 
         /* 印章纹理 */
@@ -1151,6 +1187,32 @@
             font-style: italic;
         }
 
+        /* 改运方案 */
+        .forecast-improvement {
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg,
+                rgba(46, 125, 50, 0.08) 0%,
+                rgba(46, 125, 50, 0.03) 100%);
+            border-radius: 10px;
+            border-left: 3px solid #2e7d32;
+        }
+
+        .forecast-improvement-title {
+            font-size: 0.95rem;
+            color: #2e7d32;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 0.2em;
+        }
+
+        .forecast-improvement-text {
+            font-size: 1rem;
+            color: var(--ink-gray);
+            line-height: 1.7;
+            letter-spacing: 0.05em;
+        }
+
         /* 滚动长卷效果 */
         .scroll-container {
             position: relative;
@@ -1181,112 +1243,27 @@
             .pillar-card {
                 padding: 20px 15px;
             }
-        }
 
-        /* 印章装饰 */
-        .seal {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 100px;
-            height: 100px;
-            border: 4px solid rgba(26, 26, 26, 0.3);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: rgba(26, 26, 26, 0.4);
-            transform: rotate(-15deg);
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            letter-spacing: 0.3em;
-            padding: 15px 10px;
-            cursor: none;
-            transition: all 0.4s ease;
-            background:
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(26, 26, 26, 0.02) 2px,
-                    rgba(26, 26, 26, 0.02) 4px
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(26, 26, 26, 0.02) 2px,
-                    rgba(26, 26, 26, 0.02) 4px
-                );
-        }
+            .gender-selector-container {
+                flex-direction: column;
+                gap: 15px;
+            }
 
-        .seal::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border: 2px solid rgba(26, 26, 26, 0.2);
-            border-radius: 14px;
-            opacity: 0.5;
-        }
+            .gender-label {
+                min-width: auto;
+            }
 
-        .seal::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(26, 26, 26, 0.05) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+            .gender-option {
+                padding: 12px 25px;
+            }
 
-        /* 印章悬停效果 - 朱砂红光 */
-        .seal:hover {
-            border-color: rgba(200, 50, 50, 0.6);
-            color: rgba(200, 50, 50, 0.8);
-            transform: rotate(-15deg) scale(1.05);
-            box-shadow:
-                0 0 20px rgba(200, 50, 50, 0.3),
-                0 0 40px rgba(200, 50, 50, 0.2),
-                0 0 60px rgba(200, 50, 50, 0.1),
-                inset 0 0 20px rgba(200, 50, 50, 0.1);
-        }
+            .gender-icon {
+                font-size: 1.5rem;
+            }
 
-        .seal:hover::before {
-            border-color: rgba(200, 50, 50, 0.4);
-            opacity: 1;
-        }
-
-        .seal:hover::after {
-            opacity: 1;
-            background: radial-gradient(circle at center, rgba(200, 50, 50, 0.15) 0%, transparent 70%);
-        }
-
-        /* 朱砂红光扩散动画 */
-        .seal-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .seal-glow::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(200, 50, 50, 0.4) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.8s ease;
-        }
-
-        .seal:hover .seal-glow::before {
-            width: 150px;
-            height: 150px;
+            .gender-text {
+                font-size: 1.1rem;
+            }
         }
 
         /* 响应式设计 */
@@ -1309,22 +1286,11 @@
             }
 
             .date-inputs {
-                height: auto;
-                padding-bottom: 20px;
-                min-height: auto;
+                gap: 20px;
             }
 
             .date-selector {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
                 width: 100%;
-                margin-bottom: 25px;
-            }
-
-            .qi-line {
-                display: none;
             }
 
             .ancient-dropdown {
@@ -1341,20 +1307,14 @@
             }
 
             .result-seal {
-                width: 70px;
+                width: 90px;
                 height: 70px;
                 bottom: 20px;
                 right: 20px;
             }
 
             .result-seal-text {
-                font-size: 2rem;
-            }
-
-            .seal {
-                width: 80px;
-                height: 80px;
-                font-size: 0.9rem;
+                font-size: 1.1rem;
             }
         }
 
@@ -1371,6 +1331,321 @@
                 font-size: 1.3rem;
             }
         }
+
+        /* ========== BGM 播放器 ========== */
+        .bgm-player {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+        }
+
+        .bgm-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,
+                rgba(245, 240, 230, 0.95) 0%,
+                rgba(232, 224, 208, 0.95) 100%);
+            border: 2px solid rgba(26, 26, 26, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all 0.4s ease;
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.1),
+                inset 0 0 20px rgba(26, 26, 26, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bgm-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center,
+                rgba(26, 26, 26, 0.05) 0%,
+                transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .bgm-btn:hover {
+            transform: scale(1.1);
+            box-shadow:
+                0 6px 25px rgba(0, 0, 0, 0.15),
+                inset 0 0 30px rgba(26, 26, 26, 0.1);
+            border-color: rgba(26, 26, 26, 0.3);
+        }
+
+        .bgm-btn:hover::before {
+            opacity: 1;
+        }
+
+        .bgm-btn.playing {
+            animation: bgmPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes bgmPulse {
+            0%, 100% {
+                box-shadow:
+                    0 4px 15px rgba(26, 26, 26, 0.1),
+                    0 0 0 0 rgba(26, 26, 26, 0.1),
+                    inset 0 0 20px rgba(26, 26, 26, 0.05);
+            }
+            50% {
+                box-shadow:
+                    0 4px 15px rgba(26, 26, 26, 0.15),
+                    0 0 0 10px rgba(26, 26, 26, 0),
+                    inset 0 0 30px rgba(26, 26, 26, 0.1);
+            }
+        }
+
+        .bgm-icon {
+            font-size: 1.5rem;
+            color: var(--ink-black);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bgm-btn.playing .bgm-icon {
+            animation: bgmRotate 3s linear infinite;
+        }
+
+        @keyframes bgmRotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 音符飘动效果 */
+        .music-notes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .music-note {
+            position: absolute;
+            font-size: 1rem;
+            color: var(--ink-gray);
+            opacity: 0;
+            animation: noteFloat 3s ease-in-out infinite;
+        }
+
+        .music-note:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .music-note:nth-child(2) {
+            left: 50%;
+            animation-delay: 1s;
+        }
+
+        .music-note:nth-child(3) {
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .bgm-btn:not(.playing) .music-note {
+            display: none;
+        }
+
+        @keyframes noteFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-40px) scale(1);
+            }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .bgm-player {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .bgm-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .bgm-icon {
+                font-size: 1.3rem;
+            }
+
+            .music-note {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ========== 测算中加载框 ========== */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(245, 240, 230, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .loading-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-box {
+            text-align: center;
+            padding: 50px 60px;
+            background: linear-gradient(135deg,
+                rgba(245, 240, 230, 0.98) 0%,
+                rgba(232, 224, 208, 0.98) 100%);
+            border-radius: 20px;
+            border: 3px solid rgba(26, 26, 26, 0.15);
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.15),
+                inset 0 0 60px rgba(26, 26, 26, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center,
+                rgba(26, 26, 26, 0.03) 0%,
+                transparent 70%);
+            animation: loadingRotate 8s linear infinite;
+        }
+
+        @keyframes loadingRotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .loading-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .loading-text {
+            font-size: 1.8rem;
+            color: var(--ink-black);
+            letter-spacing: 0.3em;
+            margin-bottom: 15px;
+            font-family: 'Ma Shan Zheng', serif;
+        }
+
+        .loading-subtext {
+            font-size: 1.1rem;
+            color: var(--ink-gray);
+            letter-spacing: 0.2em;
+        }
+
+        /* 墨滴加载动画 */
+        .ink-drops {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .ink-drop {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--ink-black);
+            animation: inkDropBounce 1.4s ease-in-out infinite;
+        }
+
+        .ink-drop:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .ink-drop:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .ink-drop:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes inkDropBounce {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .loading-box {
+                padding: 40px 50px;
+                margin: 20px;
+            }
+
+            .loading-icon {
+                font-size: 3rem;
+            }
+
+            .loading-text {
+                font-size: 1.5rem;
+            }
+
+            .loading-subtext {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1378,15 +1653,62 @@
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
 
+    <!-- BGM 播放器 -->
+    <div class="bgm-player">
+        <button class="bgm-btn" id="bgmBtn" title="背景音乐">
+            <div class="music-notes">
+                <span class="music-note">♪</span>
+                <span class="music-note">♫</span>
+                <span class="music-note">♪</span>
+            </div>
+            <span class="bgm-icon">🎵</span>
+        </button>
+        <audio id="bgm" loop>
+            <source src="music/Winky诗 - 觉 (伴奏).mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- 测算中加载框 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-box">
+            <div class="loading-content">
+                <div class="loading-icon">☯</div>
+                <div class="loading-text">测算中</div>
+                <div class="loading-subtext">正在解析您的命理...</div>
+                <div class="ink-drops">
+                    <span class="ink-drop"></span>
+                    <span class="ink-drop"></span>
+                    <span class="ink-drop"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <h1>墨迹命理</h1>
-            <p class="subtitle">以墨为媒 · 探寻命运</p>
+            <p class="subtitle">四柱八字生辰算命</p>
         </header>
 
         <section class="input-section">
             <div class="form-group">
                 <label>生辰八字</label>
+
+                <!-- 性别选择器 -->
+                <div class="gender-selector-container">
+                    <div class="gender-label">性别</div>
+                    <div class="gender-options">
+                        <div class="gender-option" data-value="male" id="genderMale">
+                            <span class="gender-icon">阳</span>
+                            <span class="gender-text">男</span>
+                        </div>
+                        <div class="gender-option" data-value="female" id="genderFemale">
+                            <span class="gender-icon">阴</span>
+                            <span class="gender-text">女</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="date-inputs">
                     <!-- 气韵连接线 -->
                     <div class="qi-line qi-line-1"></div>
@@ -1439,12 +1761,40 @@
         </section>
     </div>
 
-    <div class="seal">
-        <span class="seal-glow"></span>
-        <span>天机不可泄露</span>
-    </div>
-
     <script>
+        // BGM 播放器控制
+        const bgm = document.getElementById('bgm');
+        const bgmBtn = document.getElementById('bgmBtn');
+        const bgmIcon = bgmBtn.querySelector('.bgm-icon');
+        let isPlaying = false;
+
+        // 设置初始音量
+        bgm.volume = 0.3;
+
+        // 切换播放/暂停
+        bgmBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgm.pause();
+                bgmBtn.classList.remove('playing');
+                bgmIcon.textContent = '🎵';
+            } else {
+                bgm.play().then(() => {
+                    bgmBtn.classList.add('playing');
+                    bgmIcon.textContent = '⏸';
+                }).catch(err => {
+                    console.log('BGM 播放失败:', err);
+                    // 浏览器可能阻止自动播放，提示用户交互
+                });
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // 音乐结束时重新播放（loop属性可能不生效的兼容处理）
+        bgm.addEventListener('ended', () => {
+            bgm.currentTime = 0;
+            bgm.play();
+        });
+
         // 光标效果
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
@@ -1492,6 +1842,14 @@
 
         // 按钮悬停效果
         const calculateBtn = document.getElementById('calculateBtn');
+
+        // 检查按钮是否正确获取
+        if (!calculateBtn) {
+            console.error('无法找到测算按钮元素！');
+        } else {
+            console.log('测算按钮已正确获取');
+        }
+
         calculateBtn.addEventListener('mousemove', (e) => {
             const rect = calculateBtn.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -1556,6 +1914,7 @@
         let selectedMonth = null;
         let selectedDay = null;
         let selectedHour = null;
+        let selectedGender = null;
 
         // 初始化年份下拉
         function initYearDropdown() {
@@ -1760,6 +2119,22 @@
         initDayDropdown();
         initHourDropdown();
 
+        // 性别选择器事件处理
+        document.querySelectorAll('.gender-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                const gender = option.dataset.value;
+
+                // 移除所有选中状态
+                document.querySelectorAll('.gender-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // 添加当前选中状态
+                option.classList.add('selected');
+                selectedGender = gender;
+            });
+        });
+
         // 天干地支
         const heavenlyStems = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
         const earthlyBranches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
@@ -1893,7 +2268,7 @@
         }
 
         // 生成命理解析（全量命盘系统）
-        function generateFortune(eightChars, birthYear, birthMonth, birthDay) {
+        function generateFortune(eightChars, birthYear, birthMonth, birthDay, gender) {
             const fiveElementAnalysis = analyzeFiveElements(eightChars);
             const currentYear = new Date().getFullYear();
             const age = currentYear - birthYear;
@@ -1959,6 +2334,20 @@
             // 使用种子选择判词
             const getIndex = (arr) => seed % arr.length;
 
+            // 根据性别调整运势解读
+            const genderPrefix = gender === 'male' ? '男命' : '女命';
+            const genderAdjustment = gender === 'male' ? {
+                // 男命特性
+                wealthSuffix: '男子求财，当以正业为本，偏财为辅。切忌急功近利，宜稳扎稳打。',
+                marriageSuffix: '男命婚恋，宜重情义，轻形式。得一知己，胜却人间无数。',
+                careerSuffix: '男儿志在四方，当以事业为重。宜把握时机，奋勇向前。'
+            } : {
+                // 女命特性
+                wealthSuffix: '女子理财，当以稳健为先。细水长流，积少成多。忌投机冒险，宜量入为出。',
+                marriageSuffix: '女命姻缘，贵在天时。良缘易得，知己难求。宜惜眼前人，莫待无花空折枝。',
+                careerSuffix: '女子从事业，当以柔克刚。才华横溢，自有展翅之时。宜耐心守候，待机而发。'
+            };
+
             // 获取当前时间信息
             const now = new Date();
             const currentMonth = now.getMonth() + 1;
@@ -1967,9 +2356,9 @@
 
             // 计算时间运势
             const timeForecast = {
-                month: calculateTimeFortune(eightChars, now, 'month'),
-                quarter: calculateTimeFortune(eightChars, now, 'quarter'),
-                year: calculateTimeFortune(eightChars, now, 'year')
+                month: calculateTimeFortune(eightChars, now, 'month', birthYear, birthMonth, birthDay),
+                quarter: calculateTimeFortune(eightChars, now, 'quarter', birthYear, birthMonth, birthDay),
+                year: calculateTimeFortune(eightChars, now, 'year', birthYear, birthMonth, birthDay)
             };
 
             // 生成每日宜忌
@@ -1985,9 +2374,9 @@
                         description: masterDescMap[masterElement]
                     },
                     fourPillars: {
-                        wealth: wealthVerdicts[getIndex(wealthVerdicts)],
-                        marriage: marriageVerdicts[getIndex(marriageVerdicts)],
-                        career: careerVerdicts[getIndex(careerVerdicts)]
+                        wealth: wealthVerdicts[getIndex(wealthVerdicts)] + genderAdjustment.wealthSuffix,
+                        marriage: marriageVerdicts[getIndex(marriageVerdicts)] + genderAdjustment.marriageSuffix,
+                        career: careerVerdicts[getIndex(careerVerdicts)] + genderAdjustment.careerSuffix
                     }
                 },
 
@@ -2012,7 +2401,7 @@
         }
 
         // 计算时间运势
-        function calculateTimeFortune(eightChars, currentDate, period) {
+        function calculateTimeFortune(eightChars, currentDate, period, birthYear, birthMonth, birthDay) {
             const now = currentDate;
             const year = now.getFullYear();
             const month = now.getMonth() + 1;
@@ -2030,10 +2419,23 @@
                 periodNum = year;
             }
 
-            // 根据八字和时间计算运势分数（简化版，基于随机种子）
+            // 根据八字和时间计算运势分数（结合生辰和当前时间）
             const baseScore = 70;
-            const dateSeed = year + month + now.getDate();
-            const randomFactor = dateSeed % 21; // -10 to +10
+
+            // 使用生辰八字和当前时间组合作为种子
+            const dayMaster = eightChars.day[0];
+            const dayMasterIndex = heavenlyStems.indexOf(dayMaster);
+            const yearBranchIndex = earthlyBranches.indexOf(eightChars.year[1]);
+
+            // 生辰种子
+            const birthSeed = birthYear + birthMonth + birthDay + dayMasterIndex + yearBranchIndex;
+
+            // 时间种子
+            const dateSeed = year + month + now.getDate() + periodNum;
+
+            // 组合种子计算运势
+            const combinedSeed = birthSeed + dateSeed;
+            const randomFactor = (combinedSeed % 31) - 15; // -15 to +15
             const score = Math.min(100, Math.max(40, baseScore + randomFactor));
 
             // 运势描述
@@ -2057,14 +2459,38 @@
 
             const fortuneLevel = score >= 80 ? 'high' : score >= 60 ? 'medium' : 'low';
             const fortuneOptions = fortunes[fortuneLevel];
-            const fortune = fortuneOptions[Math.floor(Math.random() * fortuneOptions.length)];
+            // 使用种子选择运势描述，而不是随机选择
+            const fortune = fortuneOptions[combinedSeed % fortuneOptions.length];
+
+            // 改运方案
+            const improvementPlans = {
+                high: [
+                    '🎯 借势发力：乘运势正旺，大胆推进重要项目，把握难得机遇。',
+                    '🤝 广结善缘：多参与社交活动，建立有价值的人脉网络。',
+                    '💎 稳中求进：运势虽佳，亦需保持谦逊，切忌骄傲自满。'
+                ],
+                medium: [
+                    '⏳ 稳扎稳打：不宜大动，专注日常事务，积累实力待时机。',
+                    '🧘 静心修身：多读书学习，提升个人能力，为未来做准备。',
+                    '🔍 观察等待：保持警惕，留意市场变化，择机而动。'
+                ],
+                low: [
+                    '🛡️ 以守为攻：低调行事，避免重大决策，专注现有事务。',
+                    '🏠 养精蓄锐：多在家休养，调整身心状态，积蓄能量。',
+                    '🙏 积德行善：多做善事，积累福报，静待转机到来。'
+                ]
+            };
+
+            const improvementOptions = improvementPlans[fortuneLevel];
+            const improvement = improvementOptions[(combinedSeed + 7) % improvementOptions.length];
 
             return {
                 period: periodName,
                 periodNum: periodNum,
                 score: score,
                 fortune: fortune,
-                level: score >= 80 ? '上吉' : score >= 60 ? '中平' : '慎之'
+                level: score >= 80 ? '上吉' : score >= 60 ? '中平' : '慎之',
+                improvement: improvement
             };
         }
 
@@ -2200,6 +2626,10 @@
                                 </div>
                                 <div class="forecast-desc">${fortune.timeForecast.month.fortune}</div>
                                 <div class="forecast-advice">运势级别：${fortune.timeForecast.month.level}</div>
+                                <div class="forecast-improvement">
+                                    <div class="forecast-improvement-title">✦ 改运方案</div>
+                                    <div class="forecast-improvement-text">${fortune.timeForecast.month.improvement}</div>
+                                </div>
                             </div>
                             <div class="forecast-card">
                                 <div class="forecast-period">
@@ -2208,6 +2638,10 @@
                                 </div>
                                 <div class="forecast-desc">${fortune.timeForecast.quarter.fortune}</div>
                                 <div class="forecast-advice">运势级别：${fortune.timeForecast.quarter.level}</div>
+                                <div class="forecast-improvement">
+                                    <div class="forecast-improvement-title">✦ 改运方案</div>
+                                    <div class="forecast-improvement-text">${fortune.timeForecast.quarter.improvement}</div>
+                                </div>
                             </div>
                             <div class="forecast-card">
                                 <div class="forecast-period">
@@ -2216,6 +2650,10 @@
                                 </div>
                                 <div class="forecast-desc">${fortune.timeForecast.year.fortune}</div>
                                 <div class="forecast-advice">运势级别：${fortune.timeForecast.year.level}</div>
+                                <div class="forecast-improvement">
+                                    <div class="forecast-improvement-title">✦ 改运方案</div>
+                                    <div class="forecast-improvement-text">${fortune.timeForecast.year.improvement}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2286,11 +2724,11 @@
 
             const resultSeal = document.createElement('div');
             resultSeal.className = 'result-seal';
-            resultSeal.innerHTML = '<span class="result-seal-text">天机</span>';
+            resultSeal.innerHTML = '<span class="result-seal-text">返回顶部</span>';
             resultSection.style.position = 'relative';
             resultSection.appendChild(resultSeal);
 
-            // 印章点击事件
+            // 印章点击事件 - 返回顶部
             resultSeal.addEventListener('click', () => {
                 resultSeal.style.animation = 'sealFlash 0.6s ease';
                 setTimeout(() => {
@@ -2359,6 +2797,7 @@
             selectedMonth = null;
             selectedDay = null;
             selectedHour = null;
+            selectedGender = null;
 
             // 重置显示
             document.getElementById('yearValue').textContent = '选择年份';
@@ -2378,6 +2817,11 @@
                 selector.classList.remove('selected');
             });
 
+            // 重置性别选择
+            document.querySelectorAll('.gender-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
             // 重置隐藏的select
             yearSelect.value = '';
             monthSelect.value = '';
@@ -2390,14 +2834,46 @@
 
         // 测算按钮点击事件
         calculateBtn.addEventListener('click', () => {
+            console.log('按钮被点击');
+            console.log('selectedYear:', selectedYear, 'selectedMonth:', selectedMonth, 'selectedDay:', selectedDay, 'selectedHour:', selectedHour, 'selectedGender:', selectedGender);
+
             if (!selectedYear || !selectedMonth || !selectedDay || !selectedHour) {
                 alert('请完整填写生辰信息');
                 return;
             }
+            if (!selectedGender) {
+                alert('请选择性别');
+                return;
+            }
 
-            const eightChars = calculateEightCharacters(selectedYear, selectedMonth, selectedDay, selectedHour);
-            const fortune = generateFortune(eightChars, selectedYear, selectedMonth, selectedDay);
-            showResult(eightChars, fortune);
+            // 显示加载框
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('show');
+
+            // 随机等待 2-3 秒
+            const randomDelay = Math.random() * 1000 + 2000; // 2000-3000ms
+
+            setTimeout(() => {
+                try {
+                    console.log('开始计算八字...');
+                    const eightChars = calculateEightCharacters(selectedYear, selectedMonth, selectedDay, selectedHour);
+                    console.log('八字计算结果:', eightChars);
+
+                    console.log('开始生成运势...');
+                    const fortune = generateFortune(eightChars, selectedYear, selectedMonth, selectedDay, selectedGender);
+                    console.log('运势生成结果:', fortune);
+
+                    console.log('开始显示结果...');
+                    showResult(eightChars, fortune);
+
+                    // 隐藏加载框
+                    loadingOverlay.classList.remove('show');
+                } catch (error) {
+                    console.error('测算过程中出错:', error);
+                    alert('测算过程出错：' + error.message);
+                    loadingOverlay.classList.remove('show');
+                }
+            }, randomDelay);
         });
     </script>
 </body>
